@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2d5b96" />
+    <meta name="description" content="VoiceBox lets students send feedback and track resolutions." />
+    <link rel="stylesheet" href="styles.css" />
+    <title>VoiceBox — Speak up. Be heard.</title>
+</head>
+
+<body>
+    <header class="site-header">
+        <a class="brand" href="#student" aria-label="VoiceBox home"><span class="brand-icon"
+                aria-hidden="true">◌</span><span>Voice<span>Box</span></span></a>
+        <nav class="top-nav" aria-label="Primary navigation">
+            <a href="#submit">Submit</a>
+            <a href="#track">Track status</a>
+            <a href="#issue-board">Issue board</a>
+            <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark theme"
+                aria-pressed="false"><span aria-hidden="true">☾</span><b>Dark</b></button>
+            <button id="open-admin-button" class="admin-link">Staff login →</button>
+        </nav>
+    </header>
+
+    <main id="student-view">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <div class="hero-kicker"><span class="pulse-dot"></span> YOUR VOICE MATTERS</div>
+                <h1 id="hero-title">Speak up.<br /><em>Be heard.</em></h1>
+                <p class="hero-description">A respectful, simple place to share feedback or raise a concern—openly or
+                    anonymously.</p>
+                <div class="trust-row"><span>✓ Private by choice</span><span>✓ Trackable updates</span><span>✓ No
+                        account needed</span></div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+                <div class="art-circle circle-one"></div>
+                <div class="art-circle circle-two"></div>
+                <div class="message-card card-back"><span></span><span></span><span></span></div>
+                <div class="message-card card-front">
+                    <div class="quote-mark">“</div>
+                    <p>Small feedback can create<br />meaningful change.</p>
+                    <div class="mini-person"><i></i><i></i><i></i></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="impact-strip" aria-label="VoiceBox benefits">
+            <div><span class="impact-icon">◒</span>
+                <p><strong>Simple to report</strong><small>Send feedback in under two minutes.</small></p>
+            </div>
+            <div><span class="impact-icon">⌁</span>
+                <p><strong>Clear progress</strong><small>Follow every update with your tracking ID.</small></p>
+            </div>
+            <div><span class="impact-icon">✦</span>
+                <p><strong>Built for change</strong><small>Help staff prioritise what matters.</small></p>
+            </div>
+        </section>
+
+        <section class="student-workspace" aria-label="Student portal">
+            <div class="portal-tabs" role="tablist" aria-label="Choose an action">
+                <button class="portal-tab is-active" id="submit-tab" data-panel="submit-panel" role="tab"
+                    aria-selected="true">Send feedback</button>
+                <button class="portal-tab" id="track-tab" data-panel="track-panel" role="tab"
+                    aria-selected="false">Track a submission</button>
+            </div>
+
+            <section id="submit-panel" class="portal-panel" role="tabpanel" aria-labelledby="submit-tab">
+                <div class="panel-intro">
+                    <p class="overline">STUDENT PORTAL</p>
+                    <h2>What would you like to share?</h2>
+                    <p>Tell us what is working, what needs attention, or how we can make campus better.</p>
+                </div>
+                <form id="submission-form" novalidate>
+                    <fieldset class="choice-fieldset">
+                        <legend>Submission type <span aria-hidden="true">*</span></legend>
+                        <div class="choice-grid"><label class="choice-card"><input type="radio" name="kind"
+                                    value="Feedback" checked /><span
+                                    class="choice-icon">✦</span><strong>Feedback</strong><small>Idea, suggestion, or
+                                    appreciation</small></label><label class="choice-card"><input type="radio"
+                                    name="kind" value="Complaint" /><span
+                                    class="choice-icon">!</span><strong>Complaint</strong><small>Something that needs
+                                    resolution</small></label></div>
+                    </fieldset>
+                    <div class="form-grid">
+                        <label>Category <span aria-hidden="true">*</span><select id="category" required>
+                                <option value="" selected disabled>Select a category</option>
+                                <option>Hostel</option>
+                                <option>Mess</option>
+                                <option>Academics</option>
+                                <option>Campus facilities</option>
+                                <option>Safety</option>
+                                <option>Other</option>
+                            </select></label>
+                        <label>Subject <span aria-hidden="true">*</span><input id="subject" type="text" maxlength="90"
+                                placeholder="Short summary of your message" required /></label>
+                    </div>
+                    <label class="description-label">Describe the situation <span aria-hidden="true">*</span><textarea
+                            id="description" maxlength="1500"
+                            placeholder="Share details that can help staff understand and resolve this…"
+                            required></textarea><span class="character-count"><b
+                                id="character-count">0</b>/1500</span></label>
+                    <p id="duplicate-hint" class="duplicate-hint" hidden></p>
+                    <div class="anonymous-block">
+                        <div><strong>Submit anonymously</strong>
+                            <p>Your name and email will not be included with this submission.</p>
+                        </div><label class="switch"><input id="anonymous-toggle" type="checkbox" /><span
+                                class="slider"></span><span class="sr-only">Submit anonymously</span></label>
+                    </div>
+                    <div id="identity-fields" class="form-grid identity-fields"><label>Your name <span
+                                aria-hidden="true">*</span><input id="student-name" type="text" maxlength="80"
+                                placeholder="e.g. Aisha Khan" required /></label><label>Email address <span
+                                aria-hidden="true">*</span><input id="student-email" type="email" maxlength="120"
+                                placeholder="you@example.edu" required /></label></div>
+                    <p id="form-error" class="form-error" role="alert" hidden></p>
+                    <button class="submit-button" type="submit">Submit securely <span>→</span></button>
+                    <p class="form-footnote">Your tracking ID lets you check progress later. Please save it somewhere
+                        safe.</p>
+                </form>
+            </section>
+
+            <section id="track-panel" class="portal-panel" role="tabpanel" aria-labelledby="track-tab" hidden>
+                <div class="panel-intro narrow">
+                    <p class="overline">TRACKING</p>
+                    <h2>Check your submission</h2>
+                    <p>Enter the tracking ID you received when you sent your feedback.</p>
+                </div>
+                <form id="tracking-form" class="tracking-form"><label for="tracking-id">Tracking ID</label>
+                    <div class="tracking-input-row"><input id="tracking-id" type="text"
+                            placeholder="Example: VB-261029-A7P4Q" autocomplete="off" /><button type="submit">Check
+                            status</button></div>
+                    <p class="tracking-help">IDs are not case-sensitive. You do not need an account.</p>
+                </form>
+                <div id="tracking-result" class="tracking-result" hidden></div>
+            </section>
+        </section>
+
+        <section id="issue-board" class="issue-board" aria-labelledby="board-heading">
+            <div class="board-heading">
+                <div>
+                    <p class="overline">COMMUNITY VOICE</p>
+                    <h2 id="board-heading">Issues others are facing</h2>
+                    <p>Public posts help the campus see shared concerns. Personal details are never shown here.</p>
+                </div><label class="board-filter">Show <select id="board-category-filter">
+                        <option value="">All categories</option>
+                    </select></label>
+            </div>
+            <div id="public-board-list" class="public-board-list"></div>
+        </section>
+    </main>
+
+    <section id="admin-view" class="admin-view" hidden aria-label="Staff dashboard">
+        <header class="admin-header">
+            <div>
+                <p class="overline">VOICEBOX STAFF AREA</p>
+                <h1>Submission dashboard</h1>
+                <p class="admin-subtitle">Listen, prioritise, and close the loop—without losing the human context.</p>
+            </div>
+            <div class="admin-header-actions"><span class="staff-pill">● Staff workspace</span><button
+                    id="load-demo-button" class="secondary-button">Load demo data</button><button id="logout-button"
+                    class="logout-button">Log out</button></div>
+        </header>
+        <main class="admin-main">
+            <section id="summary-cards" class="summary-cards" aria-label="Submission summary"></section>
+            <section class="analytics-section" aria-label="Issue analytics">
+                <div class="analytics-heading">
+                    <div>
+                        <p class="overline">AT A GLANCE</p>
+                        <h2>Issue patterns</h2>
+                    </div>
+                    <p id="resolution-average" class="average-time"></p>
+                </div>
+                <div id="category-chart" class="category-chart"></div>
+            </section>
+            <section class="admin-controls"><label class="admin-search"><span aria-hidden="true">⌕</span><input
+                        id="admin-search" type="search"
+                        placeholder="Search ID, subject, or description" /></label><label><span>Category</span><select
+                        id="category-filter">
+                        <option value="">All categories</option>
+                    </select></label><label><span>Status</span><select id="status-filter">
+                        <option value="">All statuses</option>
+                        <option>Pending</option>
+                        <option>In Progress</option>
+                        <option>Resolved</option>
+                    </select></label><label><span>Date</span><input id="date-filter" type="date" /></label><button
+                    id="clear-filters-button" class="clear-filters">Clear filters</button></section>
+            <section class="admin-table-wrap">
+                <div class="table-heading">
+                    <h2>All submissions</h2><span id="admin-result-count"></span>
+                </div>
+                <div id="admin-list" class="admin-list"></div>
+            </section>
+        </main>
+    </section>
+
+    <dialog id="login-dialog" class="login-dialog"><button class="dialog-close" data-close-dialog
+            aria-label="Close login">×</button>
+        <div class="login-mark">◌</div>
+        <p class="overline">STAFF ONLY</p>
+        <h2>Welcome back</h2>
+        <p>Sign in to view and manage student submissions.</p>
+        <form id="login-form"><label for="admin-password">Demo access code</label><input id="admin-password"
+                type="password" placeholder="Enter access code" autocomplete="current-password" />
+            <p class="demo-code">For this class demo, use: <code>voicebox2026</code></p>
+            <p id="login-error" class="form-error" role="alert" hidden></p><button class="submit-button"
+                type="submit">Open dashboard</button>
+        </form>
+    </dialog>
+
+    <dialog id="success-dialog" class="success-dialog">
+        <div class="success-icon">✓</div>
+        <p class="overline">SUBMISSION RECEIVED</p>
+        <h2>Thank you for speaking up.</h2>
+        <p>Your message is now with the relevant team. Keep this tracking ID to check for updates.</p>
+        <div class="tracking-code"><code id="success-tracking-id"></code><button id="copy-tracking-button"
+                aria-label="Copy tracking ID" title="Copy tracking ID">⧉</button></div><button id="success-close-button"
+            class="submit-button">Done</button>
+    </dialog>
+
+    <template id="submission-template">
+        <article class="admin-card">
+            <div class="submission-top">
+                <div>
+                    <div class="id-row"><code class="submission-id"></code><span class="status-badge"></span></div>
+                    <h3 class="submission-subject"></h3>
+                </div>
+                <div class="submission-date"></div>
+            </div>
+            <div class="submission-meta"><span class="kind-label"></span><span class="category-label"></span><span
+                    class="identity-label"></span></div>
+            <p class="submission-description"></p>
+            <div class="submission-footer"><span class="identity-value"></span><label
+                    class="status-control"><span>Update status</span><select class="submission-status">
+                        <option>Pending</option>
+                        <option>In Progress</option>
+                        <option>Resolved</option>
+                    </select></label></div>
+        </article>
+    </template>
+
+    /* VoiceBox is a front-end class demo. Its IndexedDB data belongs to this browser only. */
+    const DB_NAME = "voicebox-db";
+    const STORE_NAME = "submissions";
+    const DEMO_ACCESS_CODE = "voicebox2026"; // Replace with real server authentication before public use.
+    const CATEGORIES = ["Hostel", "Mess", "Academics", "Campus facilities", "Safety", "Other"];
+    const URGENT_WORDS = ["fire", "harassment", "assault", "violence", "medical emergency", "unsafe", "threat"];
+
+    let database;
+    let submissions = [];
+    const upvotedIds = new Set(JSON.parse(localStorage.getItem("voicebox-upvotes") || "[]"));
+
+    const $ = (selector) => document.querySelector(selector);
+    const els = {
+    studentView: $("#student-view"), adminView: $("#admin-view"),
+    submitTab: $("#submit-tab"), trackTab: $("#track-tab"), submitPanel: $("#submit-panel"), trackPanel:
+    $("#track-panel"),
+    submissionForm: $("#submission-form"), category: $("#category"), subject: $("#subject"), description:
+    $("#description"),
+    anonymous: $("#anonymous-toggle"), identityFields: $("#identity-fields"), name: $("#student-name"), email:
+    $("#student-email"),
+    characterCount: $("#character-count"), formError: $("#form-error"),
+    trackingForm: $("#tracking-form"), trackingId: $("#tracking-id"), trackingResult: $("#tracking-result"),
+    loginDialog: $("#login-dialog"), loginForm: $("#login-form"), password: $("#admin-password"), loginError:
+    $("#login-error"),
+    successDialog: $("#success-dialog"), successId: $("#success-tracking-id"),
+    summaryCards: $("#summary-cards"), adminList: $("#admin-list"), adminCount: $("#admin-result-count"),
+    adminSearch: $("#admin-search"), categoryFilter: $("#category-filter"), statusFilter: $("#status-filter"),
+    dateFilter: $("#date-filter"),
+    categoryChart: $("#category-chart"), resolutionAverage: $("#resolution-average"),
+    boardList: $("#public-board-list"), boardCategory: $("#board-category-filter"), submissionTemplate:
+    $("#submission-template"),
+    themeToggle: $("#theme-toggle")
+    };
+
+    function openDatabase() {
+    return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, 1);
+    request.onupgradeneeded = () => request.result.createObjectStore(STORE_NAME, { keyPath: "id" });
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+    });
+    }
+
+    function readAll() {
+    return new Promise((resolve, reject) => {
+    const request = database.transaction(STORE_NAME, "readonly").objectStore(STORE_NAME).getAll();
+    request.onsuccess = () => resolve(request.result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+    request.onerror = () => reject(request.error);
+    });
+    }
+
+    function saveSubmission(submission) {
+    return new Promise((resolve, reject) => {
+    const request = database.transaction(STORE_NAME, "readwrite").objectStore(STORE_NAME).put(submission);
+    request.onsuccess = resolve;
+    request.onerror = () => reject(request.error);
+    });
+    }
+
+    function makeId() {
+    const now = new Date();
+    const date = [String(now.getFullYear()).slice(-2), String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0")].join("");
+    const random = crypto.getRandomValues(new Uint32Array(1))[0].toString(36).toUpperCase().slice(-5).padStart(5, "0");
+    return `VB-${date}-${random}`;
+    }
+
+    function displayDate(value, withTime = false) {
+    return new Intl.DateTimeFormat(undefined, { dateStyle: "medium", ...(withTime ? { timeStyle: "short" } : {})
+    }).format(new Date(value));
+    }
+
+    function dateValue(value) {
+    const date = new Date(value);
+    const offsetDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    return offsetDate.toISOString().slice(0, 10);
+    }
+
+    function show(element, visible) { element.hidden = !visible; }
+    function words(text) { return new Set((text.toLowerCase().match(/[a-z0-9]{3,}/g) || [])); }
+    function similarity(first, second) {
+    const a = words(first), b = words(second);
+    if (!a.size || !b.size) return 0;
+    let common = 0; a.forEach((word) => { if (b.has(word)) common += 1; });
+    return common / new Set([...a, ...b]).size;
+    }
+
+    function findSimilar(subject, description, category) {
+    const query = `${subject} ${description}`.trim();
+    if (query.length < 24) return []; return submissions.filter((item)=> item.category === category && similarity(query,
+        `${item.subject} ${item.description}`) >= 0.38);
+        }
+
+        function isHighPriority(item) {
+        const content = `${item.subject} ${item.description}`.toLowerCase();
+        return item.upvotes >= 5 || URGENT_WORDS.some((term) => content.includes(term));
+        }
+
+        function populateCategoryFilters() {
+        [els.categoryFilter, els.boardCategory].forEach((select) => {
+        CATEGORIES.forEach((category) => {
+        const option = document.createElement("option"); option.value = category; option.textContent = category;
+        select.append(option);
+        });
+        });
+        }
+
+        function toggleIdentityInputs() {
+        const anonymous = els.anonymous.checked;
+        els.identityFields.classList.toggle("is-hidden", anonymous);
+        els.name.required = !anonymous;
+        els.email.required = !anonymous;
+        if (anonymous) { els.name.value = ""; els.email.value = ""; }
+        }
+
+        function switchPortal(panel) {
+        const isSubmit = panel === "submit-panel";
+        els.submitTab.classList.toggle("is-active", isSubmit); els.trackTab.classList.toggle("is-active", !isSubmit);
+        els.submitTab.setAttribute("aria-selected", String(isSubmit)); els.trackTab.setAttribute("aria-selected",
+        String(!isSubmit));
+        show(els.submitPanel, isSubmit); show(els.trackPanel, !isSubmit);
+        }
+
+        function setFormError(message = "") { els.formError.textContent = message; show(els.formError,
+        Boolean(message)); }
+
+        function updateDuplicateHint() {
+        const old = $("#duplicate-hint");
+        const matches = findSimilar(els.subject.value, els.description.value, els.category.value);
+        if (matches.length && old) { old.textContent = `A similar ${matches[0].kind.toLowerCase()} may already be
+        recorded. You can still send yours—it helps staff understand the scale.`; show(old, true); }
+        else if (old) show(old, false);
+        }
+
+        function currentKind() { return document.querySelector('input[name="kind"]:checked').value; }
+
+        async function submitFeedback(event) {
+        event.preventDefault(); setFormError();
+        const anonymous = els.anonymous.checked;
+        const requiredValues = [els.category.value, els.subject.value.trim(), els.description.value.trim()];
+        if (requiredValues.some((value) => !value)) return setFormError("Please complete category, subject, and
+        description.");
+        if (!anonymous && (!els.name.value.trim() || !els.email.validity.valid)) return setFormError("Please add a valid
+        name and email, or choose anonymous submission.");
+        const timestamp = new Date().toISOString();
+        const submission = {
+        id: makeId(), kind: currentKind(), category: els.category.value, subject: els.subject.value.trim(), description:
+        els.description.value.trim(),
+        isAnonymous: anonymous, name: anonymous ? "" : els.name.value.trim(), email: anonymous ? "" :
+        els.email.value.trim(),
+        status: "Pending", createdAt: timestamp, updatedAt: timestamp, timeline: [{ status: "Pending", at: timestamp }],
+        upvotes: 0, internalNotes: [], staffReply: ""
+        };
+        await saveSubmission(submission); submissions.unshift(submission);
+        els.submissionForm.reset(); toggleIdentityInputs(); els.characterCount.textContent = "0"; updateDuplicateHint();
+        renderPublicBoard(); renderAdmin();
+        els.successId.textContent = submission.id; els.successDialog.showModal();
+        }
+
+        function renderTrackingResult(item) {
+        els.trackingResult.replaceChildren(); show(els.trackingResult, true);
+        if (!item) { els.trackingResult.innerHTML = '<div class="status-result"><strong>We could not find that
+                ID.</strong>
+            <p class="tracking-help">Check the letters and numbers, then try again. It looks like VB-261029-A7P4Q.</p>
+        </div>'; return; }
+        const container = document.createElement("div"); container.className = "status-result";
+        const heading = document.createElement("div"); heading.className = "result-title-row";
+        const info = document.createElement("div"); const id = document.createElement("code"); id.className =
+        "result-id"; id.textContent = item.id;
+        const title = document.createElement("h3"); title.textContent = item.subject; info.append(id, title);
+        const badge = statusBadge(item.status); heading.append(info, badge); container.append(heading);
+        const meta = document.createElement("p"); meta.className = "tracking-help"; meta.textContent = `${item.kind} ·
+        ${item.category} · Submitted ${displayDate(item.createdAt)}`; container.append(meta);
+        if (item.staffReply) { const reply = document.createElement("div"); reply.className = "staff-reply";
+        reply.innerHTML = "<strong>Staff response</strong>"; const text = document.createElement("span");
+        text.textContent = item.staffReply; reply.append(text); container.append(reply); }
+        const timeline = document.createElement("div"); timeline.className = "status-timeline"; timeline.innerHTML = "
+        <h4>Status timeline</h4>";
+        const list = document.createElement("ul"); list.className = "timeline-list";
+        [...item.timeline].reverse().forEach((entry) => { const row = document.createElement("li"); row.textContent =
+        `${entry.status} — ${displayDate(entry.at, true)}`; list.append(row); });
+        timeline.append(list); container.append(timeline); els.trackingResult.append(container);
+        }
+
+        function statusBadge(status) {
+        const badge = document.createElement("span"); badge.className = `status-badge
+        status-${status.toLowerCase().replaceAll(" ", "-")}`; badge.textContent = status; return badge;
+        }
+
+        function renderPublicBoard() {
+        const category = els.boardCategory.value;
+        const publicItems = submissions.filter((item) => !item.isAnonymous && (!category || item.category ===
+        category));
+        els.boardList.replaceChildren();
+        if (!publicItems.length) { const empty = document.createElement("p"); empty.className = "board-empty";
+        empty.textContent = "No public submissions in this view yet. You can be the first voice to help highlight an
+        issue."; els.boardList.append(empty); return; }
+        publicItems.forEach((item) => {
+        const card = document.createElement("article"); card.className = "public-card";
+        const top = document.createElement("div"); top.className = "public-card-top"; const labels =
+        document.createElement("div");
+        const categoryPill = document.createElement("span"); categoryPill.className = "meta-pill";
+        categoryPill.textContent = item.category; labels.append(categoryPill);
+        if (isHighPriority(item)) { const urgent = document.createElement("span"); urgent.className = "priority-badge";
+        urgent.textContent = "High priority"; labels.append(urgent); }
+        top.append(labels, statusBadge(item.status));
+        const title = document.createElement("h3"); title.textContent = item.subject;
+        const description = document.createElement("p"); description.textContent = item.description;
+        const foot = document.createElement("div"); foot.className = "public-card-footer"; const meta =
+        document.createElement("span"); meta.className = "public-meta"; meta.textContent = `${item.kind} ·
+        ${displayDate(item.createdAt)}`;
+        const upvote = document.createElement("button"); upvote.className = `upvote-button${upvotedIds.has(item.id) ? "
+        is-upvoted" : ""}`; upvote.textContent = `${upvotedIds.has(item.id) ? "✓ Backed" : "↑ I face this too"} ·
+        ${item.upvotes}`; upvote.addEventListener("click", () => toggleUpvote(item.id));
+        foot.append(meta, upvote); card.append(top, title, description, foot); els.boardList.append(card);
+        });
+        }
+
+        async function toggleUpvote(id) {
+        const item = submissions.find((candidate) => candidate.id === id); if (!item) return;
+        const isRemoving = upvotedIds.has(id); item.upvotes = Math.max(0, item.upvotes + (isRemoving ? -1 : 1));
+        if (isRemoving) upvotedIds.delete(id); else upvotedIds.add(id);
+        localStorage.setItem("voicebox-upvotes", JSON.stringify([...upvotedIds])); item.updatedAt = new
+        Date().toISOString();
+        await saveSubmission(item); renderPublicBoard(); renderAdmin();
+        }
+
+        function filteredSubmissions() {
+        const search = els.adminSearch.value.trim().toLowerCase(); const category = els.categoryFilter.value; const
+        status = els.statusFilter.value; const date = els.dateFilter.value;
+        return submissions.filter((item) => {
+        const searchable = `${item.id} ${item.subject} ${item.description} ${item.name} ${item.email}`.toLowerCase();
+        return (!search || searchable.includes(search)) && (!category || item.category === category) && (!status ||
+        item.status === status) && (!date || dateValue(item.createdAt) === date);
+        });
+        }
+
+        function renderAdmin() {
+        const total = submissions.length, pending = submissions.filter((item) => item.status === "Pending").length,
+        progress = submissions.filter((item) => item.status === "In Progress").length, resolved =
+        submissions.filter((item) => item.status === "Resolved").length;
+        els.summaryCards.replaceChildren();
+        [["All submissions", total, ""], ["Pending", pending, "pending"], ["In progress", progress, "progress"],
+        ["Resolved", resolved, "resolved"]].forEach(([label, count, className]) => { const card =
+        document.createElement("div"); card.className = `summary-card ${className}`; card.innerHTML =
+        `<span>${label}</span><strong>${count}</strong>`; els.summaryCards.append(card); });
+        renderAnalytics();
+        const matching = filteredSubmissions(); els.adminCount.textContent = `${matching.length} result${matching.length
+        === 1 ? "" : "s"}`; els.adminList.replaceChildren();
+        if (!matching.length) { const empty = document.createElement("p"); empty.className = "admin-empty";
+        empty.textContent = submissions.length ? "No submissions match these filters." : "No submissions yet. Use “Load
+        demo data” to explore the dashboard."; els.adminList.append(empty); return; }
+        matching.forEach((item) => els.adminList.append(buildAdminCard(item)));
+        }
+
+        function buildAdminCard(item) {
+        const card = els.submissionTemplate.content.firstElementChild.cloneNode(true); if (isHighPriority(item))
+        card.classList.add("is-high-priority");
+        card.querySelector(".submission-id").textContent = item.id;
+        card.querySelector(".submission-subject").textContent = item.subject;
+        card.querySelector(".submission-date").textContent = displayDate(item.createdAt, true);
+        card.querySelector(".status-badge").replaceWith(statusBadge(item.status));
+        const kind = card.querySelector(".kind-label"); kind.textContent = item.kind; if (item.kind === "Complaint")
+        kind.classList.add("complaint"); card.querySelector(".category-label").textContent = item.category;
+        const identity = card.querySelector(".identity-label"); identity.textContent = item.isAnonymous ? "Anonymous" :
+        "Identity included"; card.querySelector(".submission-description").textContent = item.description;
+        card.querySelector(".identity-value").textContent = item.isAnonymous ? "Student details hidden" : `${item.name}
+        · ${item.email}`;
+        const statusSelect = card.querySelector(".submission-status"); statusSelect.value = item.status;
+        statusSelect.addEventListener("change", async () => { if (statusSelect.value === item.status) return;
+        item.status = statusSelect.value; const now = new Date().toISOString(); item.updatedAt = now;
+        item.timeline.push({ status: item.status, at: now }); await saveSubmission(item); renderAdmin();
+        renderPublicBoard(); });
+        const extra = document.createElement("div"); extra.className = "admin-extra";
+        const replyLabel = document.createElement("label"); replyLabel.textContent = "Student-visible reply"; const
+        reply = document.createElement("textarea"); reply.placeholder = "Write a response the student can read when
+        tracking…"; reply.value = item.staffReply || ""; reply.addEventListener("change", async () => { item.staffReply
+        = reply.value.trim(); item.updatedAt = new Date().toISOString(); await saveSubmission(item); });
+        replyLabel.append(reply);
+        const notesLabel = document.createElement("label"); notesLabel.textContent = "Internal staff notes"; const row =
+        document.createElement("div"); row.className = "note-row"; const noteInput = document.createElement("input");
+        noteInput.placeholder = "Visible to staff only"; const add = document.createElement("button"); add.type =
+        "button"; add.textContent = "Add"; row.append(noteInput, add); const noteList = document.createElement("ul");
+        noteList.className = "internal-notes";
+        (item.internalNotes || []).forEach((note) => { const li = document.createElement("li"); li.textContent =
+        `${note.text} (${displayDate(note.at, true)})`; noteList.append(li); });
+        add.addEventListener("click", async () => { const text = noteInput.value.trim(); if (!text) return;
+        item.internalNotes = item.internalNotes || []; item.internalNotes.push({ text, at: new Date().toISOString() });
+        item.updatedAt = new Date().toISOString(); await saveSubmission(item); renderAdmin(); }); notesLabel.append(row,
+        noteList); extra.append(replyLabel, notesLabel); card.append(extra);
+        const timeline = document.createElement("p"); timeline.className = "timeline-mini"; timeline.textContent =
+        `Latest update: ${item.timeline[item.timeline.length - 1].status} on
+        ${displayDate(item.timeline[item.timeline.length - 1].at, true)}`; card.append(timeline); return card;
+        }
+
+        function renderAnalytics() {
+        const counts = Object.fromEntries(CATEGORIES.map((category) => [category, submissions.filter((item) =>
+        item.category === category).length])); const max = Math.max(1, ...Object.values(counts));
+        els.categoryChart.replaceChildren();
+        const visibleCategories = Object.entries(counts).filter(([, count]) => count > 0);
+        if (!visibleCategories.length) { els.categoryChart.textContent = "Data will appear here after submissions are
+        received."; els.categoryChart.style.color = "#758698"; els.categoryChart.style.fontSize = "12px"; }
+        else visibleCategories.forEach(([category, count]) => { const item = document.createElement("div");
+        item.innerHTML = `<div class="chart-bar-label"><span>${category}</span><b>${count}</b></div>
+        <div class="chart-track">
+            <div class="chart-fill" style="width:${Math.max(8, (count / max) * 100)}%"></div>
+        </div>`; els.categoryChart.append(item); });
+        const resolved = submissions.filter((item) => item.status === "Resolved" && item.timeline.some((entry) =>
+        entry.status === "Resolved"));
+        if (!resolved.length) els.resolutionAverage.textContent = "Average resolution time will appear after the first
+        resolved item.";
+        else { const hours = resolved.reduce((sum, item) => sum + (new Date(item.timeline.find((entry) => entry.status
+        === "Resolved").at) - new Date(item.createdAt)) / 3600000, 0) / resolved.length; els.resolutionAverage.innerHTML
+        = `Average resolution: <strong>${hours < 24 ? `${Math.round(hours)} hours` : `${(hours / 24).toFixed(1)}
+                days`}</strong>`; }
+                }
+
+                function loadDemoData() {
+                const now = Date.now();
+                const examples = [
+                { kind:"Complaint", category:"Mess", subject:"Dinner quality has been inconsistent", description:"For
+                the last week, dinner has often been cold by 8 PM and the vegetarian option runs out early.",
+                isAnonymous:false, name:"Riya Sharma", email:"riya@example.edu", status:"In Progress", upvotes:4,
+                staffReply:"The mess committee has been informed and is reviewing the evening serving schedule.",
+                age:62, timeline:["Pending","In Progress"] },
+                { kind:"Feedback", category:"Academics", subject:"Extend library study hours during exams",
+                description:"Keeping the library open later during examination weeks would help students who need a
+                quiet space to study.", isAnonymous:false, name:"Kabir Mehta", email:"kabir@example.edu",
+                status:"Pending", upvotes:8, staffReply:"", age:21, timeline:["Pending"] },
+                { kind:"Complaint", category:"Hostel", subject:"Water pressure is very low on the third floor",
+                description:"Morning water pressure has been too low to use the showers properly in Block B, third
+                floor.", isAnonymous:true, name:"", email:"", status:"Resolved", upvotes:2, staffReply:"Maintenance
+                repaired the affected pressure valve. Please let us know if the issue returns.", age:144,
+                timeline:["Pending","In Progress","Resolved"] },
+                { kind:"Complaint", category:"Safety", subject:"Broken streetlight near the east gate", description:"The
+                path from the east gate to the hostel is dark after 9 PM because one streetlight has stopped working.",
+                isAnonymous:false, name:"Arjun Patel", email:"arjun@example.edu", status:"Pending", upvotes:6,
+                staffReply:"", age:9, timeline:["Pending"] }
+                ];
+                Promise.all(examples.map(async (example, index) => { const created = new Date(now - example.age *
+                3600000).toISOString(); const timeline = example.timeline.map((status, position) => ({ status, at: new
+                Date(new Date(created).getTime() + position * Math.max(1, example.age / Math.max(1,
+                example.timeline.length - 1)) * 3600000).toISOString() })); const item = { id: `VB-DEMO-${String(index +
+                1).padStart(3, "0")}`, kind:example.kind, category:example.category, subject:example.subject,
+                description:example.description, isAnonymous:example.isAnonymous, name:example.name,
+                email:example.email, status:example.status, createdAt:created, updatedAt:timeline[timeline.length -
+                1].at, timeline, upvotes:example.upvotes, internalNotes:[], staffReply:example.staffReply }; if
+                (!submissions.some((existing) => existing.id === item.id)) { submissions.push(item); await
+                saveSubmission(item); } })).then(() => { submissions.sort((a,b) => new Date(b.createdAt) - new
+                Date(a.createdAt)); renderAdmin(); renderPublicBoard(); });
+                }
+
+                function clearFilters() { els.adminSearch.value = ""; els.categoryFilter.value = "";
+                els.statusFilter.value = ""; els.dateFilter.value = ""; renderAdmin(); }
+                function showAdmin() { els.studentView.hidden = true; els.adminView.hidden = false; renderAdmin();
+                window.scrollTo({ top: 0, behavior: "instant" }); }
+                function showStudent() { els.adminView.hidden = true; els.studentView.hidden = false; window.scrollTo({
+                top: 0, behavior: "instant" }); }
+
+                function setTheme(theme) {
+                const isDark = theme === "dark";
+                document.body.classList.toggle("dark-theme", isDark);
+                els.themeToggle.setAttribute("aria-pressed", String(isDark));
+                els.themeToggle.setAttribute("aria-label", `Switch to ${isDark ? "light" : "dark"} theme`);
+                els.themeToggle.innerHTML = `<span aria-hidden="true">${isDark ? "☀" : "☾"}</span><b>${isDark ? "Light"
+                    : "Dark"}</b>`;
+                localStorage.setItem("voicebox-theme", theme);
+                }
+
+                function bindEvents() {
+                els.submitTab.addEventListener("click", () => switchPortal("submit-panel"));
+                els.trackTab.addEventListener("click", () => switchPortal("track-panel"));
+                els.anonymous.addEventListener("change", toggleIdentityInputs);
+                els.description.addEventListener("input", () => { els.characterCount.textContent =
+                els.description.value.length; updateDuplicateHint(); }); els.subject.addEventListener("input",
+                updateDuplicateHint); els.category.addEventListener("change", updateDuplicateHint);
+                els.submissionForm.addEventListener("submit", submitFeedback);
+                els.trackingForm.addEventListener("submit", (event) => { event.preventDefault();
+                renderTrackingResult(submissions.find((item) => item.id.toLowerCase() ===
+                els.trackingId.value.trim().toLowerCase())); });
+                $("#open-admin-button").addEventListener("click", () => { els.loginError.hidden = true;
+                els.loginDialog.showModal(); setTimeout(() => els.password.focus(), 0); });
+                document.querySelectorAll("[data-close-dialog]").forEach((button) => button.addEventListener("click", ()
+                => button.closest("dialog").close()));
+                els.loginForm.addEventListener("submit", (event) => { event.preventDefault(); if (els.password.value !==
+                DEMO_ACCESS_CODE) { els.loginError.textContent = "That access code is not correct.";
+                els.loginError.hidden = false; return; } els.password.value = ""; els.loginDialog.close(); showAdmin();
+                });
+                $("#logout-button").addEventListener("click", showStudent);
+                $("#load-demo-button").addEventListener("click", loadDemoData);
+                $("#copy-tracking-button").addEventListener("click", async () => { await
+                navigator.clipboard?.writeText(els.successId.textContent); $("#copy-tracking-button").textContent = "✓";
+                }); $("#success-close-button").addEventListener("click", () => els.successDialog.close());
+                els.themeToggle.addEventListener("click", () => setTheme(document.body.classList.contains("dark-theme")
+                ? "light" : "dark"));
+                [els.adminSearch, els.categoryFilter, els.statusFilter, els.dateFilter].forEach((input) =>
+                input.addEventListener("input", renderAdmin)); $("#clear-filters-button").addEventListener("click",
+                clearFilters); els.boardCategory.addEventListener("change", renderPublicBoard);
+                }
+
+                async function start() {
+                try { setTheme(localStorage.getItem("voicebox-theme") || "light"); database = await openDatabase();
+                submissions = await readAll(); populateCategoryFilters(); bindEvents(); toggleIdentityInputs();
+                renderPublicBoard(); renderAdmin(); }
+                catch (error) { console.error(error); document.body.innerHTML = "<main
+                    style='padding:2rem;font-family:system-ui'>
+                    <h1>VoiceBox could not start</h1>
+                    <p>Your browser may be blocking local storage. Try opening the project through a local web server.
+                    </p>
+                </main>"; }
+                }
+
+                start();
+
+</body>
+
+</html>
